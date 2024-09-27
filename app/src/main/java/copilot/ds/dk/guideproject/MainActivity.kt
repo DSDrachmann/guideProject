@@ -11,18 +11,20 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import copilot.ds.dk.guideproject.ui.theme.CanteenAppTheme
 import copilot.ds.dk.guideproject.ui.theme.GuideProjectTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            GuideProjectTheme {
+            CanteenAppTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     //modifier = Modifier.width(100.dp),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    //app starts here.
                     AppNavHost()
                 }
             }
@@ -32,17 +34,18 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun AppNavHost(navController: NavHostController = rememberNavController()) {
-    NavHost(navController = navController, startDestination = "mainView") {
-        composable(route = "mainView") { MainView().ComposableView(navController) }
-        composable("secondView") {
-            SecondView().InputView(
-                Modifier, navController,
-                callback = { result1, result2 ->
-                    navController.navigate("mainView") }
-            )
+    NavHost(navController = navController, startDestination = "home") {
+        composable("home") { HomeScreen(navController) }
+        composable("menu/{day}") { backStackEntry ->
+            val day = backStackEntry.arguments?.getString("day") ?: ""
+            MenuScreen(navController, day)
         }
+        composable("dishDetail/{dish}") { backStackEntry ->
+            val dish = backStackEntry.arguments?.getString("dish") ?: ""
+            DishDetailScreen(dish = dish, navController = navController) }
     }
 }
+
 
 //TODO: Here are some additional things you can try with github copilot.
 //TODO: Animation - Use Copilot to add a simple animation when navigating between views.
