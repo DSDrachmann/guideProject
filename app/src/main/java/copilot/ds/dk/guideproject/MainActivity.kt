@@ -37,8 +37,29 @@ fun AppNavHost(navController: NavHostController = rememberNavController()) {
         composable("secondView") {
             SecondView().InputView(
                 Modifier, navController,
-                callback = { result1, result2 ->
-                    navController.navigate("mainView") }
+                callback = { _, _ ->
+                    navController.navigate("mainView")
+                }
+            )
+        }
+        composable("thirdView") {
+            ThirdView().ComposableView(callback = {
+                navController.popBackStack()
+                navController.navigate("mainView")
+            })
+        }
+        composable("fourthView") {
+            FourthView().ComposableView(callback = {
+                navController.popBackStack()
+                navController.navigate("mainView")
+            }
+            )
+        }
+        composable("fifthView") {
+            FifthView().ComposableView(callback = {
+                navController.popBackStack()
+                navController.navigate("mainView")
+            }
             )
         }
     }

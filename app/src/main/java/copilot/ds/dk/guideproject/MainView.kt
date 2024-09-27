@@ -33,8 +33,8 @@ class MainView() {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(16.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally, //REMOVE THIS
-                    verticalArrangement = Arrangement.Center //REMOVE THIS
+            horizontalAlignment = Alignment.CenterHorizontally, //REMOVE THIS
+            verticalArrangement = Arrangement.Center //REMOVE THIS
         ) {
             Box(
                 modifier = Modifier
@@ -51,9 +51,10 @@ class MainView() {
             ) {
                 val leftButtonColor = remember { mutableStateOf(Color.Gray) }
                 val rightButtonColor = remember { mutableStateOf(Color.Gray) }
-                Column(horizontalAlignment = Alignment.CenterHorizontally,
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center,
-                    ) {
+                ) {
                     Row {
                         Button(onClick = {
                             leftButtonColor.value =
@@ -81,7 +82,8 @@ class MainView() {
                             leftButtonColor.value = rightButtonColor.value
                             rightButtonColor.value = tempColor
                         },
-                            modifier = Modifier.padding(top = 16.dp)
+                            modifier = Modifier
+                                .padding(top = 16.dp)
                                 .align(Alignment.CenterVertically),
                             content = {
                                 Text(text = "Switch Colors")
@@ -98,6 +100,33 @@ class MainView() {
                     Text(text = "Go to Second View")
                 }
             )
+            Button(onClick = {
+                navController.navigate("thirdView")
+            },
+                modifier = Modifier.padding(top = 16.dp),
+                content = {
+                    Text(text = "Go to Third View")
+                }
+            )
+
+            Button(onClick = {
+                navController.navigate("fourthView")
+            },
+                modifier = Modifier.padding(top = 16.dp),
+                content = {
+                    Text(text = "Go to Fourth View")
+                }
+            )
+            Button(onClick = {
+                navController.navigate("fifthView")
+            },
+                modifier = Modifier.padding(top = 16.dp),
+                content = {
+                    Text(text = "Go to Fifth View")
+                }
+            )
+
         }
+
     }
 }
